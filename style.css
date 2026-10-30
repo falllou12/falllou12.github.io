@@ -281,6 +281,10 @@ p + p {
   margin: 0 auto 1.5rem;
 }
 
+.contact-buttons {
+  justify-content: center;
+}
+
 /* --- Pied de page --- */
 .footer {
   text-align: center;
@@ -308,6 +312,110 @@ p + p {
 
 .theme-toggle:hover {
   border-color: var(--accent);
+}
+
+
+/* =========================================================
+   PAGE CV
+   ========================================================= */
+
+/* Lien de la page actuelle dans le menu */
+.nav-links a[aria-current="page"] {
+  color: var(--accent);
+}
+
+.cv {
+  padding-block: 3rem;
+}
+
+.cv-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.cv-header h1 {
+  font-size: clamp(2rem, 6vw, 3rem);
+  line-height: 1.1;
+}
+
+.cv-role {
+  font-size: 1.2rem;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+/* Infos de contact séparées par des points « · » */
+.cv-contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.cv-contact li + li::before {
+  content: "·";
+  margin: 0 0.6rem;
+}
+
+.cv-contact a:hover {
+  color: var(--accent);
+}
+
+.cv-section {
+  padding-top: 2.5rem;
+}
+
+.cv-section > p {
+  max-width: 720px;
+  color: var(--text-muted);
+}
+
+.cv-section .cards {
+  margin-top: 0;
+}
+
+/* Frise chronologique de la formation */
+.timeline {
+  list-style: none;
+  border-left: 2px solid var(--border);
+  padding-left: 1.5rem;
+}
+
+.timeline li {
+  position: relative;
+  padding-bottom: 1.5rem;
+}
+
+.timeline li:last-child {
+  padding-bottom: 0;
+}
+
+/* Le petit rond sur la ligne */
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: calc(-1.5rem - 7px);  /* recule jusqu'à la ligne */
+  top: 0.35rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.timeline-date {
+  font-family: ui-monospace, monospace;
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+
+.timeline p {
+  color: var(--text-muted);
 }
 
 
@@ -350,5 +458,101 @@ p + p {
 
   .cards {
     grid-template-columns: 1fr;  /* une seule colonne */
+  }
+
+  /* CV : infos de contact les unes sous les autres, sans « · » */
+  .cv-contact {
+    flex-direction: column;
+  }
+
+  .cv-contact li + li::before {
+    content: none;
+  }
+}
+
+
+/* =========================================================
+   IMPRESSION / PDF : ne s'applique que lors de l'impression
+   ========================================================= */
+
+@media print {
+  /* Toujours en thème clair, sur fond blanc (économise l'encre) */
+  html,
+  html[data-theme] {
+    --bg: #ffffff;
+    --bg-card: #ffffff;
+    --text: #0f172a;
+    --text-muted: #334155;
+    --accent: #0e7490;
+    --accent-soft: #ecfeff;
+    --border: #cbd5e1;
+  }
+
+  /* On cache ce qui ne sert à rien sur papier */
+  .header,
+  .footer,
+  .cv-download {
+    display: none;
+  }
+
+  @page {
+    size: A4;
+    margin: 1.5cm;
+  }
+
+  body {
+    font-size: 11pt;
+    line-height: 1.45;
+  }
+
+  .container {
+    max-width: none;
+    padding: 0;
+  }
+
+  .cv {
+    padding: 0;
+  }
+
+  .cv-section {
+    padding-top: 1rem;
+    break-inside: avoid;  /* évite de couper une section entre deux pages */
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .cv-header {
+    padding-bottom: 1rem;
+  }
+
+  .card {
+    padding: 0.8rem 1rem;
+  }
+
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
+  }
+
+  .cv-section:last-child .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Frise : décalée pour que les ronds ne sortent pas de la page */
+  .timeline {
+    margin-left: 8px;
+  }
+
+  .timeline li {
+    padding-bottom: 0.7rem;
+  }
+
+  /* Imprimer les couleurs de fond (tags, ronds de la frise) */
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 }

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV — Fallou Lo</title>
+  <meta name="description" content="CV de Fallou Lo, étudiant en Bachelor en sciences informatiques à l'Université de Genève.">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+<body>
+
+  <header class="header">
+    <nav class="nav container">
+      <a href="index.html" class="logo">fallou<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html#apropos">À propos</a></li>
+        <li><a href="index.html#competences">Compétences</a></li>
+        <li><a href="index.html#projets">Projets</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><a href="cv.html" aria-current="page">CV</a></li>
+        <li>
+          <button class="theme-toggle" id="theme-toggle" aria-label="Changer de thème">🌙</button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container cv">
+
+    <!-- ===== En-tête du CV ===== -->
+    <div class="cv-header">
+      <div>
+        <h1>Fallou Lo</h1>
+        <p class="cv-role">Étudiant en sciences informatiques</p>
+        <ul class="cv-contact">
+          <li>Genève, Suisse</li>
+          <li>22 ans</li>
+          <li><a href="mailto:falloulo2004@icloud.com">falloulo2004@icloud.com</a></li>
+          <li><a href="https://github.com/falllou12">github.com/falllou12</a></li>
+          <li><a href="https://falllou12.github.io">falllou12.github.io</a></li>
+        </ul>
+      </div>
+      <a href="cv.pdf" class="btn btn-primary cv-download" download>Télécharger en PDF</a>
+    </div>
+
+    <!-- ===== Profil ===== -->
+    <section class="cv-section">
+      <h2 class="section-title">Profil</h2>
+      <p>
+        Étudiant en Bachelor en sciences informatiques à l'Université de Genève,
+        passionné de cybersécurité. Je participe à des CTF et je développe mes
+        propres outils (scanners réseau, analyse de vulnérabilités) pour
+        comprendre comment les systèmes fonctionnent et comment les protéger.
+      </p>
+    </section>
+
+    <!-- ===== Formation ===== -->
+    <section class="cv-section">
+      <h2 class="section-title">Formation</h2>
+      <ol class="timeline">
+        <li>
+          <span class="timeline-date">2025 — aujourd'hui</span>
+          <h3>Bachelor en sciences informatiques</h3>
+          <p>Université de Genève (UNIGE)</p>
+        </li>
+        <li>
+          <span class="timeline-date">2023</span>
+          <h3>Baccalauréat série S2</h3>
+          <p>Série scientifique</p>
+        </li>
+        <li>
+          <span class="timeline-date">2020</span>
+          <h3>BFEM</h3>
+          <p>Brevet de fin d'études moyennes</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ===== Compétences ===== -->
+    <section class="cv-section">
+      <h2 class="section-title">Compétences</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Langages</h3>
+          <ul class="tags">
+            <li>Python</li>
+            <li>C</li>
+            <li>Bash</li>
+            <li>HTML / CSS</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Sécurité</h3>
+          <ul class="tags">
+            <li>Scan de ports</li>
+            <li>Analyse de vulnérabilités</li>
+            <li>CTF</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Outils</h3>
+          <ul class="tags">
+            <li>Linux</li>
+            <li>Git</li>
+            <li>Nmap</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Langues & intérêts ===== -->
+    <section class="cv-section">
+      <div class="cards">
+        <div class="card">
+          <h3>Langues</h3>
+          <ul class="languages">
+            <li>Français <span>Courant</span></li>
+            <li>Anglais <span>B2</span></li>
+            <li>Espagnol <span>B2</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Centres d'intérêt</h3>
+          <ul class="tags">
+            <li>Cybersécurité</li>
+            <li>CTF</li>
+            <li>Développement</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 Fallou Lo</p>
+  </footer>
+
+</body>
+</html>
