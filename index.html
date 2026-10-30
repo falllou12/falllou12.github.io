@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fallou — Portfolio</title>
+  <meta name="description" content="Portfolio de Fallou, étudiant en informatique à l'Université de Genève — cybersécurité, CTF et développement.">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+<body>
+
+  <header class="header">
+    <nav class="nav container">
+      <a href="#accueil" class="logo">fallou<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="#apropos">À propos</a></li>
+        <li><a href="#competences">Compétences</a></li>
+        <li><a href="#projets">Projets</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li>
+          <button class="theme-toggle" id="theme-toggle" aria-label="Changer de thème">🌙</button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===== Accueil ===== -->
+    <section id="accueil" class="hero container">
+      <p class="hero-hello">Bonjour, je suis</p>
+      <h1>Fallou</h1>
+      <p class="hero-subtitle">Étudiant en informatique à l'Université de Genève</p>
+      <p class="hero-text">
+        Passionné de cybersécurité, de CTF et de développement.
+        J'apprends en construisant mes propres outils.
+      </p>
+      <div class="hero-buttons">
+        <a href="#projets" class="btn btn-primary">Voir mes projets</a>
+        <a href="#contact" class="btn btn-outline">Me contacter</a>
+      </div>
+    </section>
+
+    <!-- ===== À propos ===== -->
+    <section id="apropos" class="section container">
+      <h2 class="section-title">À propos</h2>
+      <p>
+        Je suis étudiant en informatique à l'Université de Genève (UNIGE).
+        J'aime comprendre comment les systèmes fonctionnent pour mieux
+        les protéger.
+      </p>
+      <p>
+        Je m'intéresse surtout à la cybersécurité, je participe à des CTF
+        (Capture The Flag) et je développe mes propres petits projets.
+      </p>
+
+      <div class="cards">
+        <div class="card">
+          <h3>Centres d'intérêt</h3>
+          <ul class="tags">
+            <li>Cybersécurité</li>
+            <li>CTF</li>
+            <li>Développement</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Langues</h3>
+          <ul class="languages">
+            <li>Français <span>Courant</span></li>
+            <li>Anglais <span>B2</span></li>
+            <li>Espagnol <span>B2</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Compétences ===== -->
+    <section id="competences" class="section container">
+      <h2 class="section-title">Compétences</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Langages</h3>
+          <ul class="tags">
+            <li>Python</li>
+            <li>C</li>
+            <li>Bash</li>
+            <li>HTML / CSS</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Sécurité</h3>
+          <ul class="tags">
+            <li>Scan de ports</li>
+            <li>Analyse de vulnérabilités</li>
+            <li>CTF</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Outils</h3>
+          <ul class="tags">
+            <li>Linux</li>
+            <li>Git</li>
+            <li>Nmap</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Projets ===== -->
+    <section id="projets" class="section container">
+      <h2 class="section-title">Projets</h2>
+      <div class="cards">
+        <!--
+          Pour ajouter un projet : copie ce bloc, enlève les marques
+          de commentaire autour, et remplis-le.
+
+        <article class="card">
+          <h3>Nom du projet</h3>
+          <p>Courte description du projet.</p>
+          <ul class="tags">
+            <li>Python</li>
+          </ul>
+          <a href="https://github.com/..." target="_blank" rel="noopener">Voir le code →</a>
+        </article>
+        -->
+        <p class="empty">Projets à venir…</p>
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section id="contact" class="section container contact">
+      <h2 class="section-title">Contact</h2>
+      <p>Une question, un stage, un projet ? N'hésitez pas à m'écrire.</p>
+      <a href="mailto:falloulo2004@icloud.com" class="btn btn-primary">falloulo2004@icloud.com</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 Fallou</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,354 @@
+/* =========================================================
+   ÉTAPE 3 — BASE : couleurs, polices, espacements
+   ========================================================= */
+
+/* Variables de couleur — thème CLAIR (par défaut).
+   :root = l'élément <html>. Les variables commencent par -- */
+:root {
+  --bg: #f8fafc;          /* fond de la page */
+  --bg-card: #ffffff;     /* fond des cartes */
+  --text: #0f172a;        /* texte principal */
+  --text-muted: #475569;  /* texte secondaire */
+  --accent: #0891b2;      /* couleur d'accent (boutons, liens) */
+  --accent-soft: rgba(8, 145, 178, 0.1);
+  --border: #e2e8f0;
+  --radius: 10px;         /* arrondi des coins */
+}
+
+/* Thème SOMBRE : on ne change que les valeurs des variables.
+   Il s'active quand <html> a l'attribut data-theme="dark". */
+[data-theme="dark"] {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --accent: #22d3ee;
+  --accent-soft: rgba(34, 211, 238, 0.1);
+  --border: #334155;
+}
+
+/* Remise à zéro : les navigateurs ajoutent des marges par défaut */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;  /* défilement doux vers les ancres */
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  transition: background 0.3s, color 0.3s;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+p + p {
+  margin-top: 1rem;  /* espace entre deux paragraphes qui se suivent */
+}
+
+
+/* =========================================================
+   ÉTAPE 4 — MISE EN PAGE : menu, sections, cartes
+   ========================================================= */
+
+/* Conteneur : largeur max + centrage + marges sur les côtés */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-inline: 1.5rem;
+}
+
+/* --- Menu --- */
+.header {
+  position: sticky;  /* reste collé en haut pendant le défilement */
+  top: 0;
+  z-index: 10;       /* passe au-dessus du reste */
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav {
+  display: flex;                    /* aligne les enfants en ligne */
+  justify-content: space-between;   /* logo à gauche, liens à droite */
+  align-items: center;              /* centrés verticalement */
+  gap: 1rem;
+  min-height: 64px;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.logo span {
+  color: var(--accent);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+}
+
+/* --- Accueil --- */
+.hero {
+  min-height: calc(100vh - 64px);  /* hauteur de l'écran moins le menu */
+  display: flex;
+  flex-direction: column;          /* empile les éléments verticalement */
+  justify-content: center;
+}
+
+.hero-hello {
+  color: var(--accent);
+  font-family: ui-monospace, monospace;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 8vw, 4.5rem);  /* min, idéal, max */
+  line-height: 1.1;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.2rem, 4vw, 2rem);
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.hero-text {
+  max-width: 560px;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* --- Boutons --- */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  overflow-wrap: anywhere;  /* coupe un e-mail trop long au lieu de déborder */
+  transition: transform 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);  /* petit soulèvement au survol */
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.btn-outline {
+  border: 1px solid var(--accent);
+  color: var(--accent);
+}
+
+/* --- Sections --- */
+.section {
+  padding-block: 5rem;  /* espace en haut et en bas */
+}
+
+.section > p {
+  max-width: 680px;
+  color: var(--text-muted);
+}
+
+.section-title {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Ligne décorative après le titre, créée en CSS (pas dans le HTML) */
+.section-title::after {
+  content: "";
+  flex: 1;           /* prend toute la place restante */
+  height: 1px;
+  background: var(--border);
+}
+
+/* --- Cartes en grille --- */
+.cards {
+  display: grid;
+  /* autant de colonnes que possible, chacune d'au moins 250px */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+
+.card h3 {
+  margin-bottom: 0.75rem;
+}
+
+/* --- Étiquettes (tags) --- */
+.tags {
+  display: flex;
+  flex-wrap: wrap;  /* passent à la ligne si pas assez de place */
+  gap: 0.5rem;
+}
+
+.tags li {
+  font-family: ui-monospace, monospace;
+  font-size: 0.8rem;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+}
+
+/* --- Langues --- */
+.languages li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.languages li:last-child {
+  border-bottom: none;
+}
+
+.languages span {
+  font-family: ui-monospace, monospace;
+  color: var(--accent);
+}
+
+/* --- Projets vides --- */
+.empty {
+  grid-column: 1 / -1;  /* occupe toute la largeur de la grille */
+  text-align: center;
+  color: var(--text-muted);
+  font-style: italic;
+  padding: 2.5rem 1rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+
+/* --- Contact --- */
+.contact {
+  text-align: center;
+}
+
+.contact .section-title {
+  justify-content: center;
+}
+
+.contact .section-title::after {
+  display: none;
+}
+
+.contact > p {
+  margin: 0 auto 1.5rem;
+}
+
+/* --- Pied de page --- */
+.footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--border);
+}
+
+
+/* =========================================================
+   ÉTAPE 6 — BOUTON CLAIR / SOMBRE
+   ========================================================= */
+
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+}
+
+
+/* =========================================================
+   ÉTAPE 5 — RESPONSIVE : écrans de moins de 600px (téléphones)
+   ========================================================= */
+
+@media (max-width: 600px) {
+  /* Menu : logo au-dessus, liens en dessous */
+  .nav {
+    flex-direction: column;
+    padding-block: 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1rem;
+  }
+
+  .hero {
+    min-height: auto;
+    padding-block: 4rem 3rem;
+  }
+
+  /* Boutons en pleine largeur : plus faciles à toucher */
+  .hero-buttons .btn {
+    flex: 1 1 100%;
+    text-align: center;
+  }
+
+  .section {
+    padding-block: 3rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;  /* une seule colonne */
+  }
+}
