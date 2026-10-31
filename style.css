@@ -424,6 +424,199 @@ p + p {
 
 
 /* =========================================================
+   PROJETS — carte de l'accueil + page détaillée d'un projet
+   ========================================================= */
+
+/* Carte : la description et les tags prennent la place,
+   les liens restent collés en bas de la carte */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.project-card h3 {
+  margin-bottom: 0;
+}
+
+.card p {
+  color: var(--text-muted);
+}
+
+.card-links {
+  margin-top: auto;   /* pousse les liens en bas */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  padding-top: 0.5rem;
+  font-weight: 600;
+}
+
+/* Code dans le texte : <code>Host</code> */
+.project-page code,
+.card code {
+  font-family: ui-monospace, monospace;
+  font-size: 0.85em;
+  background: var(--accent-soft);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+
+/* --- Page détaillée --- */
+.project-page {
+  padding-block: 2.5rem 4rem;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 2rem;
+  font-weight: 600;
+}
+
+.project-header h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.project-lead {
+  max-width: 680px;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.project-header .tags {
+  margin-bottom: 1.5rem;
+}
+
+/* Chiffres clés */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-block: 3rem;
+}
+
+.stats li {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stats strong {
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--accent);
+  font-family: ui-monospace, monospace;
+}
+
+.stats span {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.project-section {
+  padding-block: 2.5rem;
+}
+
+.project-section > p {
+  max-width: 680px;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.project-section .cards {
+  margin-top: 0;
+}
+
+/* 4 cartes → grille 2 × 2 (au lieu de 3 + 1 carte seule) */
+.cards-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* Tableau des attaques : défile horizontalement sur petit écran
+   au lieu de déborder de la page */
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.attack-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-card);
+  font-size: 0.95rem;
+}
+
+.attack-table th,
+.attack-table td {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.attack-table th {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.attack-table td:first-child {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.attack-table td:last-child {
+  color: var(--text-muted);
+}
+
+.attack-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Schéma de l'architecture */
+.diagram {
+  font-family: ui-monospace, monospace;
+  font-size: 0.85rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  overflow-x: auto;
+  margin-bottom: 1.25rem;
+  color: var(--accent);
+}
+
+/* Liste avec des coches */
+.checklist li {
+  position: relative;
+  padding-left: 1.75rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-muted);
+}
+
+.checklist li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.project-footer-links {
+  margin-top: 2rem;
+}
+
+
+/* =========================================================
    ÉTAPE 5 — RESPONSIVE : écrans de moins de 600px (téléphones)
    ========================================================= */
 
@@ -462,6 +655,15 @@ p + p {
 
   .cards {
     grid-template-columns: 1fr;  /* une seule colonne */
+  }
+
+  .cards-2 {
+    grid-template-columns: 1fr;
+  }
+
+  /* Page projet : le nom de l'attaque peut passer à la ligne */
+  .attack-table td:first-child {
+    white-space: normal;
   }
 
   /* CV : infos de contact les unes sous les autres, sans « · » */

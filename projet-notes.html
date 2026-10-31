@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestionnaire de notes sécurisé — Fallou</title>
+  <meta name="description" content="Projet de Fallou : application web Flask conçue pour résister aux attaques courantes (SQLi, XSS, CSRF, brute-force), avec 2FA, journal de sécurité et déploiement Docker durci.">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+<body>
+
+  <header class="header">
+    <nav class="nav container">
+      <a href="index.html" class="logo">fallou<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html#apropos">À propos</a></li>
+        <li><a href="index.html#competences">Compétences</a></li>
+        <li><a href="index.html#projets" aria-current="page">Projets</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><a href="cv.html">CV</a></li>
+        <li>
+          <button class="theme-toggle" id="theme-toggle" aria-label="Changer de thème">🌙</button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container project-page">
+
+    <a href="index.html#projets" class="back-link">← Tous les projets</a>
+
+    <!-- ===== En-tête du projet ===== -->
+    <header class="project-header">
+      <p class="hero-hello">Projet</p>
+      <h1>Gestionnaire de notes sécurisé</h1>
+      <p class="project-lead">
+        Une application web où chaque utilisateur crée et gère ses notes
+        privées. L'objectif n'était pas la fonctionnalité en elle-même,
+        mais d'apprendre à <strong>construire une application qui résiste
+        aux attaques</strong>, puis de le <strong>prouver</strong> en
+        l'attaquant moi-même.
+      </p>
+      <ul class="tags">
+        <li>Python</li>
+        <li>Flask</li>
+        <li>SQLite</li>
+        <li>Argon2</li>
+        <li>2FA / TOTP</li>
+        <li>pytest</li>
+        <li>Docker</li>
+        <li>nginx</li>
+        <li>redis</li>
+      </ul>
+      <div class="hero-buttons">
+        <a href="https://github.com/falllou12/projet-app" class="btn btn-primary" target="_blank" rel="noopener">Voir le code sur GitHub</a>
+      </div>
+    </header>
+
+    <!-- ===== Chiffres clés ===== -->
+    <ul class="stats">
+      <li><strong>75</strong><span>tests qui simulent des attaques</span></li>
+      <li><strong>15</strong><span>types d'événements journalisés</span></li>
+      <li><strong>0</strong><span>vulnérabilité connue (bandit, pip-audit)</span></li>
+    </ul>
+
+    <!-- ===== Fonctionnalités ===== -->
+    <section class="project-section">
+      <h2 class="section-title">Fonctionnalités</h2>
+      <div class="cards cards-2">
+        <div class="card">
+          <h3>Comptes</h3>
+          <p>Inscription, connexion, changement de mot de passe, suppression du compte avec effacement réel des données.</p>
+        </div>
+        <div class="card">
+          <h3>Double authentification</h3>
+          <p>Codes TOTP (Google Authenticator, Aegis…) via QR code, et 10 codes de secours à usage unique, régénérables.</p>
+        </div>
+        <div class="card">
+          <h3>Sessions</h3>
+          <p>Déconnexion de tous les autres appareils, automatique après un changement de mot de passe.</p>
+        </div>
+        <div class="card">
+          <h3>Journal de sécurité</h3>
+          <p>Chaque utilisateur voit l'activité de son compte (connexions, échecs, blocages) et peut repérer une intrusion.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Attaques bloquées ===== -->
+    <section class="project-section">
+      <h2 class="section-title">Attaques bloquées</h2>
+      <p>Pour chaque attaque, au moins un test automatisé tente l'attaque et vérifie qu'elle échoue.</p>
+      <div class="table-wrap">
+        <table class="attack-table">
+          <thead>
+            <tr><th>Attaque</th><th>Protection</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Injection SQL</td><td>Requêtes paramétrées, jamais de SQL construit à partir d'une saisie</td></tr>
+            <tr><td>XSS</td><td>Échappement automatique des templates + Content-Security-Policy stricte</td></tr>
+            <tr><td>CSRF</td><td>Jeton dans chaque formulaire, actions sensibles uniquement en POST</td></tr>
+            <tr><td>IDOR (lire la note d'un autre)</td><td>Chaque requête vérifie le propriétaire ; réponse 404 pour ne rien révéler</td></tr>
+            <tr><td>Vol de la base de données</td><td>Mots de passe hachés avec Argon2id ; codes de secours hachés</td></tr>
+            <tr><td>Brute-force distribué (botnet)</td><td>Limite par IP <em>et</em> blocage progressif par compte (1, 2, 4… min, max 1 h)</td></tr>
+            <tr><td>Énumération des comptes</td><td>Messages et temps de réponse identiques, que le compte existe ou non</td></tr>
+            <tr><td>Vol de cookie de session</td><td>Cookies <code>HttpOnly</code>, <code>Secure</code>, <code>SameSite</code> ; révocation des sessions</td></tr>
+            <tr><td>Rejeu d'un code 2FA intercepté</td><td>Chaque code TOTP n'est accepté qu'une seule fois</td></tr>
+            <tr><td>Injection de logs (CWE-117)</td><td>Journal au format JSON : une saisie ne peut pas créer de fausse ligne</td></tr>
+            <tr><td>Récupération de données supprimées</td><td><code>secure_delete</code> : les données effacées sont écrasées dans le fichier</td></tr>
+            <tr><td>Falsification d'IP / d'en-tête Host</td><td>Une seule source de confiance (nginx) et liste blanche des noms d'hôte</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== Architecture ===== -->
+    <section class="project-section">
+      <h2 class="section-title">Déploiement</h2>
+      <p>Trois conteneurs Docker, organisés comme un vrai serveur de production :</p>
+<pre class="diagram" aria-label="Schéma : le navigateur parle en HTTPS à nginx, qui transmet à l'application gunicorn, qui utilise redis">Navigateur ──HTTPS──▶ nginx ──▶ app (Flask + gunicorn) ──▶ redis
+                     (TLS)     réseau interne, sans accès à Internet</pre>
+      <ul class="checklist">
+        <li>HTTPS uniquement, TLS 1.2 et 1.3, protection contre Slowloris</li>
+        <li>Conteneurs sans root, système de fichiers en lecture seule, aucun privilège Linux</li>
+        <li>L'application n'a pas accès à Internet : impossible d'exfiltrer des données</li>
+        <li>Ports ouverts uniquement en local (Docker contourne le pare-feu <code>ufw</code>)</li>
+      </ul>
+    </section>
+
+    <!-- ===== Ce que j'ai appris ===== -->
+    <section class="project-section">
+      <h2 class="section-title">Ce que j'ai appris</h2>
+      <div class="cards cards-2">
+        <div class="card">
+          <h3>Tester le vrai déploiement</h3>
+          <p>
+            Les 73 tests passaient, mais derrière nginx <strong>tous les
+            formulaires étaient refusés</strong> : le port disparaissait de
+            l'en-tête <code>Host</code>. Seule une attaque contre le
+            déploiement réel l'a révélé.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Une protection peut créer une faille</h3>
+          <p>
+            Bloquer un compte après 5 échecs permet à un attaquant de bloquer
+            n'importe qui. D'où un blocage progressif plafonné, et des
+            échecs comptés même pour les noms inexistants.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Supprimer n'est pas effacer</h3>
+          <p>
+            Avec SQLite, une note « supprimée » restait lisible dans le
+            fichier avec <code>strings</code>. Ma machine l'effaçait par
+            défaut, une autre non : il ne faut pas dépendre des réglages par défaut.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Vérifier les outils</h3>
+          <p>
+            Un « 0 problème » de bandit ne prouve rien : je l'ai d'abord
+            testé sur un fichier volontairement vulnérable, et j'ai trouvé
+            ses angles morts.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="hero-buttons project-footer-links">
+      <a href="https://github.com/falllou12/projet-app" class="btn btn-primary" target="_blank" rel="noopener">Voir le code sur GitHub</a>
+      <a href="index.html#projets" class="btn btn-outline">← Retour aux projets</a>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 Fallou</p>
+  </footer>
+
+</body>
+</html>
