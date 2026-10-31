@@ -418,6 +418,10 @@ p + p {
   color: var(--text-muted);
 }
 
+.timeline p + p {
+  margin-top: 0.25rem;  /* lignes d'une même étape : plus serrées */
+}
+
 
 /* =========================================================
    ÉTAPE 5 — RESPONSIVE : écrans de moins de 600px (téléphones)
@@ -501,8 +505,8 @@ p + p {
   }
 
   body {
-    font-size: 11pt;
-    line-height: 1.45;
+    font-size: 10.5pt;
+    line-height: 1.4;
   }
 
   .container {
@@ -515,7 +519,7 @@ p + p {
   }
 
   .cv-section {
-    padding-top: 1rem;
+    padding-top: 0.7rem;
     break-inside: avoid;  /* évite de couper une section entre deux pages */
   }
 
